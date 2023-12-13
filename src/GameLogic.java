@@ -66,15 +66,19 @@ public class GameLogic {
 
 
     private void displayHelp() {
-        System.out.println("Available commands:");
-        System.out.println("1. north - Move north");
-        System.out.println("2. south - Move south");
-        System.out.println("3. west - Move west");
-        System.out.println("4. east - Move east");
-        System.out.println("5. help - Display this help message");
-        System.out.println("6. quit - Quit the game");
-        System.out.println("7. inventory - Check your inventory");
-        System.out.println("8. name of the item - Use an item from your inventory");
+
+        System.out.println("\n\5----------------------------------------------------------------\5");
+        System.out.println("\nThe \"help\" command displays a list of available commands that can be used in the game.\n\nHere is a list of commands that you can use:");
+//        System.out.println("Available commands:");
+        System.out.println("<direction>: Moves the player in the specified direction (north, south, west, east");
+//        System.out.println("1. north - Move north");
+//        System.out.println("2. south - Move south");
+//        System.out.println("3. west - Move west");
+//        System.out.println("4. east - Move east");
+        System.out.println("\"inventory\"  - Check your inventory");
+        System.out.println("\"use <item>\" - Use an item from your inventory");
+        System.out.println("\"help\" - Display this help message");
+        System.out.println("\"quit\" - Quit the game");
         System.out.println("Objective of the game:");
         System.out.println("Explore your choices carefully, because your actions have consequences. Be mindful of your decisions as you navigate through this adventure.");
     }
