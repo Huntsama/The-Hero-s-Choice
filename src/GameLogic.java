@@ -12,17 +12,31 @@ public class GameLogic {
         this.map = new Item("Map", 0, 1);
         this.sword = new Item("Sword", 0, 2);
     }
-    public void start() {
-        System.out.println("Welcome to the Hero's choice game");
-        System.out.println("You are an adventurer in a forest");
+    public void start() throws InterruptedException {
+        introStory();
+//        System.out.println("Welcome to the Hero's choice game");
+//        System.out.println("You are an adventurer in a forest");
         exploreCave();
         System.out.println("Thanks for playing");
         scanner.close();
     }
 
+    //The about story and introduction of the game
+    public void introStory() throws InterruptedException {
+        String BLUE = "\u001B[34m";
+        String aboutGame = BLUE + "Welcome to the Hero's choice game! In this text-based game you are an adventurer travelling around a village\nexploring the beautiful tranquility of the universe\nyou heard a woman screaming from a cave, you then decided to rescue the lady by going through the cave\nAfter following them to the cave an adventure ensured\nas the player the choices you make after the story and decides what happens.\nPrepare yourself for an adventure that will test your courage.\nLet the game begin!\n ";
+        for(int i= 0; i<aboutGame.length(); i++){
+            System.out.print(aboutGame.charAt(i));
+            Thread.sleep(15); //reference from: https://www.geeksforgeeks.org/thread-sleep-method-in-java-with-examples/
+        }
+        Thread.sleep(700);
+        System.out.println();
+
+    }
+
     private void exploreCave() {
 
-        System.out.println("After following the sound and the women screaming, you followed at the entry of a cave.");
+       // System.out.println("After following the sound and the women screaming, you followed at the entry of a cave.");
 //      System.out.println("Current location: (" + player.getLocation().getX() + ", " + player.getLocation().getY() + ")");
 
         while (true) {
