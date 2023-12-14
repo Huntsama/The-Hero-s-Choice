@@ -4,7 +4,7 @@ public class GameLogic {
     private Player player;
     private Scanner scanner;
     private Item torch, map, sword;
-    private Ally friendlyAlly;
+    private Ally miner;
     private Ally princess;
     private Enemy kidnapper;
 
@@ -14,7 +14,7 @@ public class GameLogic {
         this.torch = new Item("Torch", 2, 2);
         this.map = new Item("Map", 0, 1);
         this.sword = new Item("Sword", 0, 2);
-        this.friendlyAlly = new Ally("friendlyAlly", 1, 1);
+        this.miner = new Ally("miner", 1, 1);
         this.princess = new Ally("princess", 4, 4);
         this.kidnapper = new Enemy("kidnapper", 3, 3);
 
@@ -106,7 +106,7 @@ public class GameLogic {
 
 
     private void showNpcEncounter() {
-        NpcEncounter(friendlyAlly);
+        NpcEncounter(miner);
         NpcEncounter(kidnapper);
         NpcEncounter(princess);
     }
