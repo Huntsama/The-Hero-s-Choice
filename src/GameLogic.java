@@ -1,6 +1,12 @@
 import java.util.Scanner;
-
+/*
+the game logic class contains most of the logic of the game
+when the game begins it calls the start method from this class
+it method to start, display help, pickupitems,  showPickUpItem etc
+ */
 public class GameLogic {
+
+    //instance variables
     private Player player;
     private Scanner scanner;
     private Item torch, map, sword;
@@ -8,29 +14,44 @@ public class GameLogic {
     private Ally princess;
     private Enemy kidnapper;
 
+    /*
+    constructor to instantiate the gameLogic
+    some item, Ally and Enemy and their location are placed as the game starts
+
+     */
     public GameLogic() {
         this.player = new Player();
         this.scanner = new Scanner(System.in);
         this.torch = new Item("Torch", 2, 2);
         this.map = new Item("Map", 0, 1);
         this.sword = new Item("Sword", 0, 2);
-        this.miner = new Ally("miner", 1, 1);
-        this.princess = new Ally("princess", 4, 4);
-        this.kidnapper = new Enemy("kidnapper", 3, 3);
+        this.miner = new Ally("miner", "you met a miner, he described the area to you and offers support and guidance",1, 1);
+        this.princess = new Ally("princess", "you finally met the princess tired so and thirsty",4, 4);
+        this.kidnapper = new Enemy("kidnapper","The kiddnapper" ,3, 3);
 
     }
+    /*
+    the method starts is called in the main to being the game
+    when the game becomes the introStroy and exploreCave() are called.
+     */
+
     public void start() throws InterruptedException {
         introStory();
         exploreCave();
-        System.out.println("Thanks for playing");
+        System.out.println("Thanks for playing"); //this is printed when you quit the game
         scanner.close();
     }
 
-    //The about story and introduction of the game
+    /*
+    About the game story and introduction of the game method
+    this is used to welcome the player and introduce the game and the mission to the player
+    the method uses thread.sleep and time in millisconds to animate the introduction story
+    by looping through and displaying the words one after the other with the time specified.
+     */
 
     public void introStory() throws InterruptedException {
-//        String BLUE = "\u001B[34m";
-        String aboutGame ="Welcome to the Hero's choice game! In this text-based game you are an adventurer travelling around a village\nexploring the beautiful tranquility of the universe\nyou heard a woman screaming from a cave, you then decided to rescue the lady by going through the cave\nAfter following them to the cave an adventure ensured\nas the player the choices you make after the story and decides what happens.\nPrepare yourself for an adventure that will test your courage.\nLet the game begin!\n ";
+
+        String aboutGame ="Welcome to the Hero's choice game! In this text-based game you are an adventurer travelling around a village\nexploring the beautiful tranquility of the universe you heard a woman screaming from a cave\nyou then decided to rescue the lady by going through the cave\nAfter following them to the cave an adventure ensured\nas the player the choices you make after the story and decides what happens.\nPrepare yourself for an adventure that will test your courage.\nEnter help to display Help commands!\n \nLet the game begin!\n ";
         for(int i= 0; i<aboutGame.length(); i++){
             System.out.print(aboutGame.charAt(i));
             Thread.sleep(15); //reference from: https://www.geeksforgeeks.org/thread-sleep-method-in-java-with-examples/
@@ -40,6 +61,13 @@ public class GameLogic {
 
     }
 
+
+    /*
+    the exploreCave method allows for the interaction of the player
+    it allows the player to make an input by typing a command
+    Until the player types quite, it will display the various options for the user to chose
+    using the switch case to display various method and decisions
+     */
     private void exploreCave() {
 
 //      System.out.println("Current location: (" + player.getLocation().getX() + ", " + player.getLocation().getY() + ")");
@@ -71,6 +99,10 @@ public class GameLogic {
     }
 
 
+    /*
+    the help method display the various commands and how to use them in the game
+    by indicating the keywords to type when playing the game
+     */
     private void displayHelp() {
 
         System.out.println("\n\5----------------------------------------------------------------\5");
@@ -84,6 +116,15 @@ public class GameLogic {
         System.out.println("Explore your choices carefully, because your actions have consequences. Be mindful of your decisions as you navigate through this adventure.");
     }
 
+
+    /*
+    the pickUpItem is limited to the GameLogic class only and checks a number of conditions to see if the player
+    has encountered an item or not through checking the position of the player and the position of the item the conditions are
+    if the item has not been encountered yet. (!item.isEncountered) and also
+    compares the x and y coordinates of the players location with those of the items location to see if they match
+    if the conditions are met, the code inside the if block is executed and the player takes decision based on it.
+    @param item : item
+     */
     private void pickUpItem(Item item) {
         if (!item.isEncountered() && player.getLocation().getX() == item.getLocation().getX()
                 && player.getLocation().getY() == item.getLocation().getY()) {
@@ -98,6 +139,10 @@ public class GameLogic {
         }
     }
 
+/*
+the method is accessed only within this class
+this calls the pickUpItem method with the instance of the item such as torch, map,sword
+ */
     private void showPickUpItem() {
         pickUpItem(torch);
         pickUpItem(map);
@@ -105,6 +150,10 @@ public class GameLogic {
     }
 
 
+    /*
+the method is accessed only within this class
+this calls the NpcEncounter method with various instances of the super class NPC
+ */
     private void showNpcEncounter() {
         NpcEncounter(miner);
         NpcEncounter(kidnapper);
@@ -112,10 +161,15 @@ public class GameLogic {
     }
 
 
+    /*
+     the NpcEncounter is the similar to the pickUpItem method.However, this method compares the location of the player
+     to and an NPC which can either be an Ally or an Enemy. If the conditions are met an NPC shows ups.
+    @param NPC : npc
+     */
     private void NpcEncounter(NPC npc) {
         if (!npc.isEncountered() && npc.getLocation().getX() == player.getLocation().getX()
                 && npc.getLocation().getY() == player.getLocation().getY()) {
-            System.out.println("You encounter " + npc.getName());
+            System.out.println("You encounter " + npc.getName() );
             npc.setEncountered(true);
 
         }
