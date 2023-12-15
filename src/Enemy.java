@@ -6,7 +6,7 @@ the mission.
 
 
 public class Enemy extends NPC {
- public Enemy(String name,String descriptin, int x, int y){
-     super(name,descriptin,x,y); //this calls the constructor of the superclass NPC with the provided arguments
+ public Enemy(String name,String description, int x, int y){
+     super(name,description,x,y); //this calls the constructor of the superclass NPC with the provided arguments
  }
 }

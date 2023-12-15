@@ -27,7 +27,7 @@ public class GameLogic {
         this.sword = new Item("Sword", 0, 2);
         this.miner = new Ally("miner", "you met a miner, he described the area to you and offers support and guidance",1, 1);
         this.princess = new Ally("princess", "you finally met the princess tired so and thirsty",4, 4);
-        this.kidnapper = new Enemy("kidnapper","The kiddnapper" ,3, 3);
+        this.kidnapper = new Enemy("kidnapper","The kidnapper" ,3, 3);
 
     }
     /*
