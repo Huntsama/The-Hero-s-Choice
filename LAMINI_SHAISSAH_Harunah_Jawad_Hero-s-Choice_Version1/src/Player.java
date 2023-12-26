@@ -8,37 +8,22 @@ the player can as well use the use the item in the inventory
 
 
 public class Player {
+
+
     private Location location; //instance variable to check location
     private Inventory inventory; //instance variable to keep items
-    private String name;
-    private String description;
 
     //constructor to instantiate the player class
-    public Player(String name, String description) {
+    public Player() {
         this.location = new Location(0, 0); //the initial location of the player is set to 0,0
         this.inventory = new Inventory();
-        this.name = name;
     }
-
 
     //returning the location of the player
     public Location getLocation() {
         return location;
     }
 
-    public String getName(){
-        return getName();
-    }
-
-    public void setName(String name){
-        this.name = name;
-    }
-    public String getDescription(){
-        return description;
-    }
-    public void setDescription(String description){
-        this.description = description;
-    }
     /*
     the move method uses switch case to move the player to north, south ,west and east based on the location
     in other to avoid error all input from the user is converted to lowerCase.

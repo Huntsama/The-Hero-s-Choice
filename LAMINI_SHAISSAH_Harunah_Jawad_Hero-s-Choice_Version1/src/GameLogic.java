@@ -1,14 +1,10 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
 import java.util.Scanner;
 /*
 the game logic class contains most of the logic of the game
 when the game begins it calls the start method from this class
 it method to start, display help, pickupitems,  showPickUpItem etc
  */
-public class GameLogic implements Serializable {
+public class GameLogic {
 
     //instance variables
     private Player player;
@@ -18,16 +14,13 @@ public class GameLogic implements Serializable {
     private Ally princess;
     private Enemy kidnapper;
 
-    private Story story;
-
-    public GameLogic(){};
     /*
     constructor to instantiate the gameLogic
     some item, Ally and Enemy and their location are placed as the game starts
 
      */
-    public GameLogic(String pName, String pDescription) {
-        this.player = new Player(pName,pDescription);
+    public GameLogic() {
+        this.player = new Player();
         this.scanner = new Scanner(System.in);
         this.torch = new Item("Torch", 2, 2);
         this.map = new Item("Map", 0, 1);
@@ -35,21 +28,17 @@ public class GameLogic implements Serializable {
         this.miner = new Ally("miner", "you met a miner, he described the area to you and offers support and guidance",1, 1);
         this.princess = new Ally("princess", "you finally met the princess tired so and thirsty",4, 4);
         this.kidnapper = new Enemy("kidnapper","The kidnapper" ,3, 3);
-        this.story = new Story();
 
     }
-
     /*
     the method starts is called in the main to being the game
     when the game becomes the introStroy and exploreCave() are called.
      */
 
-    public void start() throws Exception {
-
-        story.firstStory();
+    public void start() throws InterruptedException {
+        introStory();
         exploreCave();
-        //Welcome back message
-        System.out.print("Thanks for playing"); //this is printed when you quit the game
+        System.out.println("Thanks for playing"); //this is printed when you quit the game
         scanner.close();
     }
 
@@ -60,7 +49,17 @@ public class GameLogic implements Serializable {
     by looping through and displaying the words one after the other with the time specified.
      */
 
+    public void introStory() throws InterruptedException {
 
+        String aboutGame ="Welcome to the Hero's choice game! In this text-based game you are an adventurer travelling around a village\nexploring the beautiful tranquility of the universe you heard a woman screaming from a cave\nyou then decided to rescue the lady by going through the cave\nAfter following them to the cave an adventure ensured\nas the player the choices you make after the story and decides what happens.\nPrepare yourself for an adventure that will test your courage.\nEnter help to display Help commands!\n \nLet the game begin!\n ";
+        for(int i= 0; i<aboutGame.length(); i++){
+            System.out.print(aboutGame.charAt(i));
+            Thread.sleep(15); //reference from: https://www.geeksforgeeks.org/thread-sleep-method-in-java-with-examples/
+        }
+        Thread.sleep(700);
+        System.out.println();
+
+    }
 
 
     /*
@@ -69,7 +68,7 @@ public class GameLogic implements Serializable {
     Until the player types quite, it will display the various options for the user to chose
     using the switch case to display various method and decisions
      */
-    private void exploreCave() throws Exception {
+    private void exploreCave() {
 
 //      System.out.println("Current location: (" + player.getLocation().getX() + ", " + player.getLocation().getY() + ")");
 
@@ -80,7 +79,6 @@ public class GameLogic implements Serializable {
             String command = scanner.nextLine().toLowerCase();
             switch (command) {
                 case "quit":
-                    quiteAndSave();
                     return;
                 case "help":
                     displayHelp();
@@ -176,94 +174,6 @@ this calls the NpcEncounter method with various instances of the super class NPC
 
         }
     }
-
-    public void  loadPreviousGame() throws NullPointerException  {
-        GameLogic gameLogic = new GameLogic();
-    try {
-        gameLogic = new LoadGame().loadGame();
-        gameLogic.player.getName();
-        //Welcome back message
-        System.out.println("\n\4--------------------------------\4");
-        System.out.println("WELCOME BACK, " +   gameLogic.player.getName());
-        System.out.println("\4--------------------------------\4");
-
-        //users last location
-        System.out.println("\n| You were at, " + player.getLocation());
-        System.out.println("\4-------------------------\4");
-        System.out.println(gameLogic.loadGame().loadGame()+"\n");
-    }catch (Exception e){
-        System.out.println("You do not have saved game ");
-    }
-
-
-    }
-
-
-        public GameLogic loadGame(){
-            File f = new File("src\\save.txt");
-            if(f.exists()){
-                try{
-                    FileInputStream file = new FileInputStream(f);
-                    ObjectInputStream objectFile = new ObjectInputStream(file);
-                    GameLogic gameLogic = (GameLogic) objectFile.readObject();
-                    file.close();
-                    objectFile.close();
-                    return gameLogic;
-                }catch (Exception e){
-                    System.out.println("Something went wrong");
-
-                }
-            }
-            return null;
-        }
-
-
-    public  void   newGame(){
-        Scanner input = new Scanner(System.in);
-        //Taking players name
-        System.out.println("Enter your name: ");
-        String pName = input.nextLine();
-
-        GameLogic gameLogic = new GameLogic(pName,"Main Player");
-        System.out.println("You are in " + gameLogic.player.getLocation());
-        System.out.println("\4-------------------------\4");
-        try {
-            gameLogic.start();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void quiteAndSave() throws Exception {
-        GameLogic gameLogic = new GameLogic();
-        new SaveGame().saveGame(gameLogic);
-        System.out.println("Do you want to save the progress? (y/n) ");
-        String command = scanner.nextLine().toLowerCase().strip();
-        try {
-            if(command.equals("y")){
-                new SaveGame().saveGame(gameLogic);
-                System.out.println("Game saved");
-                for(int i=0; i<3; i++){
-                    Thread.sleep(1000);
-                    System.out.print(".");
-                }
-            } else if (command.equals("n")) {
-                System.out.println("Quitting the Game");
-            }
-        } catch (Exception e) {
-            System.out.println("Error occurred while saving the game" + e.getMessage());;
-        }
-    }
-
-    public void selectOption(){
-        System.out.println("What do you want to continue with ? ");
-        System.out.println("\4-------------------\4 \4-------------------\4");
-        System.out.println("   1. NEW GAME          2. PREVIOUS GAME");
-        System.out.println("\4-------------------\4 \4-------------------\4 ");
-    }
-
-
-
 
 
 }
