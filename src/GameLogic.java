@@ -33,8 +33,8 @@ public class GameLogic implements Serializable {
         this.map = new Item("Map", 0, 1);
         this.sword = new Item("Sword", 0, 2);
         this.miner = new Ally("miner", "you met a miner, he described the area to you and offers support and guidance",1, 1);
-        this.princess = new Ally("princess", "you finally met the princess tired so and thirsty",4, 4);
-        this.kidnapper = new Enemy("kidnapper","The kidnapper" ,3, 3);
+        this.princess = new Ally("princess", "you finally met the princess tired so and thirsty",3, 3);
+        this.kidnapper = new Enemy("kidnapper","The kidnapper" ,4, 4);
         this.story = new Story();
 
     }
@@ -152,16 +152,6 @@ this calls the pickUpItem method with the instance of the item such as torch, ma
     }
 
 
-    /*
-the method is accessed only within this class
-this calls the NpcEncounter method with various instances of the super class NPC
- */
-    private void showNpcEncounter() {
-        NpcEncounter(miner);
-        NpcEncounter(kidnapper);
-        NpcEncounter(princess);
-    }
-
 
     /*
      the NpcEncounter is the similar to the pickUpItem method.However, this method compares the location of the player
@@ -176,6 +166,23 @@ this calls the NpcEncounter method with various instances of the super class NPC
 
         }
     }
+
+    /*
+    the method is accessed only within this class
+    this calls the NpcEncounter method with various instances of the super class NPC
+    */
+
+    private void showNpcEncounter() {
+        NpcEncounter(miner);
+        NpcEncounter(kidnapper);
+        NpcEncounter(princess);
+    }
+
+
+
+    //TODO to comment this section and also the saving is not working (i guess it didnt work for me)
+
+
 
     public void  loadPreviousGame() throws NullPointerException  {
         GameLogic gameLogic = new GameLogic();

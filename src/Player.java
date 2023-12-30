@@ -12,12 +12,19 @@ public class Player {
     private Inventory inventory; //instance variable to keep items
     private String name;
     private String description;
+    private Story story;
+    private GameLogic gameLogic;
+
 
     //constructor to instantiate the player class
     public Player(String name, String description) {
         this.location = new Location(0, 0); //the initial location of the player is set to 0,0
         this.inventory = new Inventory();
         this.name = name;
+        this.description = description;
+        this.story = new Story();
+        this.gameLogic = new GameLogic();
+
     }
 
 
@@ -66,20 +73,26 @@ public class Player {
     the useItem method allows the player to use items in the inventory
     based on the item selected to be used the description and consequencies are displayed
      */
-    public void useItem(String itemName) {
+    public void useItem(String itemName) throws InterruptedException {
         if (inventory.contains(itemName)) {
-            switch (itemName.toLowerCase()) {
-                case "torch":
-                    System.out.println("You turn the torch on, but now your cover is blown and an enemy is following you!");
-                    break;
-                case "map":
-                    System.out.println("This is where you are: " + getLocation());
-                    break;
-                case "sword":
-                    System.out.println("You wield the sword, ready for battle!");
-                    break;
-                default:
-                    System.out.println("Invalid command type -> help <- for more information");
+            try {
+                switch (itemName.toLowerCase()) {
+                    case "torch":
+                        System.out.println("You turn the torch on, but now your cover is blown and an enemy is following you!");
+                        story.badEnding();
+                        gameLogic.quiteAndSave();
+                        break;
+                    case "map":
+                        System.out.println("This is where you are: " + getLocation());
+                        break;
+                    case "sword":
+                        System.out.println("You wield the sword, ready for battle!");
+                        break;
+                    default:
+                        System.out.println("Invalid command type -> help <- for more information");
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         } else {
             System.out.println("You don't have this item in your inventory.");

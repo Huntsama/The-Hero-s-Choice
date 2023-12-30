@@ -23,4 +23,39 @@ public class Story {
         Thread.sleep(700);
         System.out.println();
     }
+
+    public void goodEnding() throws InterruptedException {
+        String ending ="You bravely faced the challenges within the cave and successfully rescued the girl. To your surprise, she reveals herself as the lost princess of the kingdom. Grateful for your heroism, she and the entire kingdom recognize you as their savior. Love blossoms between you two, and eventually, you become the king, ruling the kingdom together. You both live happily ever after.";
+        for(int i= 0; i<ending.length(); i++){
+            System.out.print(ending.charAt(i));
+            Thread.sleep(15);
+        }
+        Thread.sleep(700);
+        System.out.println();
+    }
+
+    public void badEnding() throws InterruptedException {
+        try {
+            String ending ="Unfortunately, you couldn't rescue the girl, and you got killed by the mob. Your valiant effort ends in failure, and the village mourns the loss of both you and the trapped girl.";
+            for (int i = 0; i < ending.length(); i++) {
+                System.out.print(ending.charAt(i));
+                Thread.sleep(15);
+            }
+            Thread.sleep(700);
+            System.out.println();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void neutralEnding() throws InterruptedException {
+        String ending ="Deciding to avoid further trouble, you cautiously make your way out of the cave.Returning home, you rest, leaving the mysteries of the cave behind. Life goes on without any significant changes, and the tranquility of the village is undisturbed.";
+        for(int i= 0; i<ending.length(); i++){
+            System.out.print(ending.charAt(i));
+            Thread.sleep(15);
+        }
+        Thread.sleep(700);
+        System.out.println();
+    }
+
 }

@@ -37,8 +37,8 @@ public class HeroesChoiceMain {
 
 
         }
-//        GameLogic player = new GameLogic("","");
-//        player.start();
+        //gameLogic player = new GameLogic("","");
+        //player.start();
 
 
 }
