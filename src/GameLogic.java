@@ -13,6 +13,7 @@ public class GameLogic {
     private Ally miner;
     private Ally princess;
     private Enemy kidnapper;
+    private Story story;
 
     /*
     constructor to instantiate the gameLogic
@@ -20,23 +21,23 @@ public class GameLogic {
 
      */
     public GameLogic() {
-        this.player = new Player();
+        this.player = new Player(this);
         this.scanner = new Scanner(System.in);
-        this.torch = new Item("Torch", 2, 2);
+        this.torch = new Item("Torch", 1, 1);
         this.map = new Item("Map", 0, 1);
         this.sword = new Item("Sword", 0, 2);
-        this.miner = new Ally("miner", "you met a miner, he described the area to you and offers support and guidance",1, 1);
-        this.princess = new Ally("princess", "you finally met the princess tired so and thirsty",4, 4);
+        this.miner = new Ally("miner", "miner in the cave",1, 1);
+        this.princess = new Ally("girl", "kidnapped girl",2, 2);
         this.kidnapper = new Enemy("kidnapper","The kidnapper" ,3, 3);
-
+        this.story = new Story();
     }
     /*
     the method starts is called in the main to being the game
     when the game becomes the introStroy and exploreCave() are called.
      */
 
-    public void start() throws InterruptedException {
-        introStory();
+    public void start() throws Exception {
+        story.introStory();
         exploreCave();
         System.out.println("Thanks for playing"); //this is printed when you quit the game
         scanner.close();
@@ -68,13 +69,14 @@ public class GameLogic {
     Until the player types quite, it will display the various options for the user to chose
     using the switch case to display various method and decisions
      */
-    private void exploreCave() {
+    private void exploreCave() throws Exception {
 
 //      System.out.println("Current location: (" + player.getLocation().getX() + ", " + player.getLocation().getY() + ")");
 
         while (true) {
             showPickUpItem();
             showNpcEncounter();
+            leavingCave();
             System.out.print("Enter your command: ");
             String command = scanner.nextLine().toLowerCase();
             switch (command) {
@@ -175,5 +177,19 @@ this calls the NpcEncounter method with various instances of the super class NPC
         }
     }
 
+
+    public void quit(){
+        System.out.println("Game Over");
+        System.out.println("Thank you for playing ");
+        System.exit(1);
+    }
+
+    private void leavingCave() throws InterruptedException {
+        if (player.getLocation().getX() == 0 && player.getLocation().getY() == -1) {
+            System.out.println("You left the cave");
+            story.neutralEnding();
+            quit();
+        }
+    }
 
 }

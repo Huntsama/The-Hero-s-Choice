@@ -10,13 +10,18 @@ the player can as well use the use the item in the inventory
 public class Player {
 
 
-    private Location location; //instance variable to check location
-    private Inventory inventory; //instance variable to keep items
+    private Location location;
+    private Inventory inventory;
+    private Story story;
+    private GameLogic gameLogic;
 
-    //constructor to instantiate the player class
-    public Player() {
-        this.location = new Location(0, 0); //the initial location of the player is set to 0,0
+
+    //passing the GameLogic instance to the Player constructor
+    public Player(GameLogic gameLogic) {
+        this.location = new Location(0, 0);
         this.inventory = new Inventory();
+        this.story = new Story();
+        this.gameLogic = gameLogic;
     }
 
     //returning the location of the player
@@ -51,11 +56,13 @@ public class Player {
     the useItem method allows the player to use items in the inventory
     based on the item selected to be used the description and consequencies are displayed
      */
-    public void useItem(String itemName) {
+    public void useItem(String itemName) throws Exception {
         if (inventory.contains(itemName)) {
             switch (itemName.toLowerCase()) {
                 case "torch":
                     System.out.println("You turn the torch on, but now your cover is blown and an enemy is following you!");
+                    story.badEnding();
+                    gameLogic.quit();
                     break;
                 case "map":
                     System.out.println("This is where you are: " + getLocation());
