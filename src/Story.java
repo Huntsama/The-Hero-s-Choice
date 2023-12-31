@@ -25,7 +25,7 @@ public class Story {
     }
 
     public void goodEnding() throws InterruptedException {
-        String ending ="You bravely faced the challenges within the cave and successfully rescued the girl.\nTo your surprise, she reveals herself as the lost princess of the kingdom. Grateful for your heroism,\n she and the entire kingdom recognize you as their savior. Love blossoms between you two, and eventually, you become the king, ruling the kingdom together. You both live happily ever after.";
+        String ending ="You bravely faced the challenges within the cave and successfully rescued the girl.\n To your surprise, she reveals herself as the lost princess of the kingdom. Grateful for your heroism,\n she and the entire kingdom recognize you as their savior. Love blossoms between you two, and eventually, you become the king, \n ruling the kingdom together. You both live happily ever after.";
         for(int i= 0; i<ending.length(); i++){
             System.out.print(ending.charAt(i));
             Thread.sleep(15);

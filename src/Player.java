@@ -92,4 +92,10 @@ public class Player {
     public void checkInventory() {
         inventory.showInventory();
     }
+
+
+    public boolean hasItem(String itemName) {
+        return inventory.contains(itemName);
+    }
+
 }

@@ -23,12 +23,12 @@ public class GameLogic {
     public GameLogic() {
         this.player = new Player(this);
         this.scanner = new Scanner(System.in);
-        this.torch = new Item("Torch", 1, 1);
+        this.torch = new Item("Torch", 2, 2);
         this.map = new Item("Map", 0, 1);
         this.sword = new Item("Sword", 0, 2);
         this.miner = new Ally("miner", "miner in the cave",1, 1);
-        this.princess = new Ally("girl", "kidnapped girl",2, 2);
-        this.kidnapper = new Enemy("kidnapper","The kidnapper" ,3, 3);
+        this.princess = new Ally("girl", "kidnapped girl",3, 3);
+        this.kidnapper = new Enemy("kidnapper","The kidnapper" ,4, 4,this);
         this.story = new Story();
     }
     /*
@@ -156,7 +156,7 @@ this calls the pickUpItem method with the instance of the item such as torch, ma
 the method is accessed only within this class
 this calls the NpcEncounter method with various instances of the super class NPC
  */
-    private void showNpcEncounter() {
+    private void showNpcEncounter() throws InterruptedException {
         NpcEncounter(miner);
         NpcEncounter(kidnapper);
         NpcEncounter(princess);
@@ -168,14 +168,17 @@ this calls the NpcEncounter method with various instances of the super class NPC
      to and an NPC which can either be an Ally or an Enemy. If the conditions are met an NPC shows ups.
     @param NPC : npc
      */
-    private void NpcEncounter(NPC npc) {
+    private void NpcEncounter(NPC npc) throws InterruptedException {
         if (!npc.isEncountered() && npc.getLocation().getX() == player.getLocation().getX()
                 && npc.getLocation().getY() == player.getLocation().getY()) {
-            System.out.println("You encounter " + npc.getName() );
+            System.out.println("You encounter " + npc.getName());
             npc.setEncountered(true);
-
+            if (npc instanceof Enemy) {
+                ((Enemy) npc).encounter(player);
+            }
         }
     }
+
 
 
     public void quit(){
