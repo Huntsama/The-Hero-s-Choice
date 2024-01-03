@@ -48,7 +48,7 @@ public class Location {
     }
 
     public void moveEast() {
-        if ((x < 4) && !(x == 0 && y == -1)) { // Updated boundary for moving east
+        if (x < 4) { // Updated boundary for moving east
             x++;
             System.out.println("You moved east");
 

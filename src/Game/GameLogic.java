@@ -173,6 +173,7 @@ this calls the NpcEncounter method with various instances of the super class Cha
      to and an Characters.NPC which can either be an Characters.Ally or an Characters.Enemy. If the conditions are met an Characters.NPC shows ups.
     @param Characters.NPC : npc
      */
+
     private void NpcEncounter(NPC npc) throws InterruptedException {
         if (!npc.isEncountered() && npc.getLocation().getX() == player.getLocation().getX()
                 && npc.getLocation().getY() == player.getLocation().getY()) {
@@ -180,7 +181,10 @@ this calls the NpcEncounter method with various instances of the super class Cha
             npc.setEncountered(true);
             if (npc instanceof Enemy) {
                 ((Enemy) npc).enemyEncounter(player);
+            } else if (npc instanceof Ally) {
+                ((Ally) npc).allyEncounter(player);
             }
+
         }
     }
     public void quit(){
