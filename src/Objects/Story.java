@@ -1,7 +1,15 @@
+package Objects;
+
 public class Story {
 
     public Story(){}
 
+    /*
+About the game story and introduction of the game method
+this is used to welcome the player and introduce the game and the mission to the player
+the method uses thread.sleep and time in millisconds to animate the introduction story
+by looping through and displaying the words one after the other with the time specified.
+*/
     public void introStory() throws InterruptedException {
 
         String aboutGame ="Welcome to the Hero's choice game! In this text-based game you are an adventurer travelling around a village\nexploring the beautiful tranquility of the universe you heard a woman screaming from a cave\nyou then decided to rescue the lady by going through the cave\nAfter following them to the cave an adventure ensured\nas the player the choices you make after the story and decides what happens.\nPrepare yourself for an adventure that will test your courage.\nEnter help to display Help commands!\n \nLet the game begin!\n ";
@@ -57,5 +65,8 @@ public class Story {
         Thread.sleep(700);
         System.out.println();
     }
+
+
+
 
 }

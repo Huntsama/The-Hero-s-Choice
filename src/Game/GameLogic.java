@@ -1,3 +1,13 @@
+package Game;
+
+import Characters.Ally;
+import Characters.Enemy;
+import Characters.NPC;
+import Objects.Item;
+import Characters.Player;
+import Objects.Story;
+import Objects.UserInterface;
+
 import java.util.Scanner;
 /*
 the game logic class contains most of the logic of the game
@@ -14,10 +24,11 @@ public class GameLogic {
     private Ally princess;
     private Enemy kidnapper;
     private Story story;
+    private UserInterface userInterface;
 
     /*
     constructor to instantiate the gameLogic
-    some item, Ally and Enemy and their location are placed as the game starts
+    some item, Characters.Ally and Characters.Enemy and their location are placed as the game starts
 
      */
     public GameLogic() {
@@ -30,6 +41,7 @@ public class GameLogic {
         this.princess = new Ally("girl", "kidnapped girl",3, 3);
         this.kidnapper = new Enemy("kidnapper","The kidnapper" ,4, 4,this);
         this.story = new Story();
+        this.userInterface = new UserInterface();
     }
     /*
     the method starts is called in the main to being the game
@@ -37,31 +49,13 @@ public class GameLogic {
      */
 
     public void start() throws Exception {
+        userInterface.startGame();
         story.introStory();
+        story.firstStory();
         exploreCave();
         System.out.println("Thanks for playing"); //this is printed when you quit the game
         scanner.close();
     }
-
-    /*
-    About the game story and introduction of the game method
-    this is used to welcome the player and introduce the game and the mission to the player
-    the method uses thread.sleep and time in millisconds to animate the introduction story
-    by looping through and displaying the words one after the other with the time specified.
-     */
-
-    public void introStory() throws InterruptedException {
-
-        String aboutGame ="Welcome to the Hero's choice game! In this text-based game you are an adventurer travelling around a village\nexploring the beautiful tranquility of the universe you heard a woman screaming from a cave\nyou then decided to rescue the lady by going through the cave\nAfter following them to the cave an adventure ensured\nas the player the choices you make after the story and decides what happens.\nPrepare yourself for an adventure that will test your courage.\nEnter help to display Help commands!\n \nLet the game begin!\n ";
-        for(int i= 0; i<aboutGame.length(); i++){
-            System.out.print(aboutGame.charAt(i));
-            Thread.sleep(15); //reference from: https://www.geeksforgeeks.org/thread-sleep-method-in-java-with-examples/
-        }
-        Thread.sleep(700);
-        System.out.println();
-
-    }
-
 
     /*
     the exploreCave method allows for the interaction of the player
@@ -120,7 +114,7 @@ public class GameLogic {
 
 
     /*
-    the pickUpItem is limited to the GameLogic class only and checks a number of conditions to see if the player
+    the pickUpItem is limited to the Game.GameLogic class only and checks a number of conditions to see if the player
     has encountered an item or not through checking the position of the player and the position of the item the conditions are
     if the item has not been encountered yet. (!item.isEncountered) and also
     compares the x and y coordinates of the players location with those of the items location to see if they match
@@ -131,13 +125,24 @@ public class GameLogic {
         if (!item.isEncountered() && player.getLocation().getX() == item.getLocation().getX()
                 && player.getLocation().getY() == item.getLocation().getY()) {
             System.out.println("you found a " + item.getName() + ". do you want to pick it up? (type yes to pick it up)");
-            String response = scanner.nextLine().toLowerCase();
-            item.setEncountered(true);
-            if (response.equals("yes")) {
-                player.pickUpItem(item);
-            } else {
-                System.out.println("you ignored the " + item.getName() + " and you did not picked it up.");
+            boolean validResponses =false;
+            while (!validResponses){
+                String response = scanner.nextLine().toLowerCase();
+                if("yes".equals(response)){
+                    item.setEncountered(true);
+                    player.pickUpItem(item);
+                    validResponses = true;
+                } else if ("no".equals(response)) {
+                    validResponses = true;
+                    System.out.println("You ignored the " + item.getName() + " and did not pick it up");
+
+                }else{
+                    System.out.println("Invalid response. Please type 'yes' or 'no' ");
+                }
+
             }
+
+
         }
     }
 
@@ -154,7 +159,7 @@ this calls the pickUpItem method with the instance of the item such as torch, ma
 
     /*
 the method is accessed only within this class
-this calls the NpcEncounter method with various instances of the super class NPC
+this calls the NpcEncounter method with various instances of the super class Characters.NPC
  */
     private void showNpcEncounter() throws InterruptedException {
         NpcEncounter(miner);
@@ -165,8 +170,8 @@ this calls the NpcEncounter method with various instances of the super class NPC
 
     /*
      the NpcEncounter is the similar to the pickUpItem method.However, this method compares the location of the player
-     to and an NPC which can either be an Ally or an Enemy. If the conditions are met an NPC shows ups.
-    @param NPC : npc
+     to and an Characters.NPC which can either be an Characters.Ally or an Characters.Enemy. If the conditions are met an Characters.NPC shows ups.
+    @param Characters.NPC : npc
      */
     private void NpcEncounter(NPC npc) throws InterruptedException {
         if (!npc.isEncountered() && npc.getLocation().getX() == player.getLocation().getX()
@@ -174,13 +179,10 @@ this calls the NpcEncounter method with various instances of the super class NPC
             System.out.println("You encounter " + npc.getName());
             npc.setEncountered(true);
             if (npc instanceof Enemy) {
-                ((Enemy) npc).encounter(player);
+                ((Enemy) npc).enemyEncounter(player);
             }
         }
     }
-
-
-
     public void quit(){
         System.out.println("Game Over");
         System.out.println("Thank you for playing ");

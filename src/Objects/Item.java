@@ -1,3 +1,5 @@
+package Objects;
+
 /*
 the item class allows for items to be used in the game
 various items can be created from the item class

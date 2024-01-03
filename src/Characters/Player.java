@@ -1,10 +1,17 @@
-/*
+package Characters;/*
 the player class is defines the properties, functionality and operations of the player
 it has the move method which is define the movement of the player to varous coordinates
 the player can also pick up an item when encountered it and add to the inventory
 the player can as well use the use the item in the inventory
 
  */
+
+
+import Game.GameLogic;
+import Objects.Inventory;
+import Objects.Item;
+import Objects.Location;
+import Objects.Story;
 
 
 public class Player {
@@ -16,7 +23,7 @@ public class Player {
     private GameLogic gameLogic;
 
 
-    //passing the GameLogic instance to the Player constructor
+    //passing the Game.GameLogic instance to the Characters.Player constructor
     public Player(GameLogic gameLogic) {
         this.location = new Location(0, 0);
         this.inventory = new Inventory();
