@@ -21,10 +21,9 @@ public class Inventory {
     the method allows to add items in the inventory list
     @param item: item
      */
-    public void addItem(Item item) {
+    public void addItem(Item item){
         items.add(item);
     }
-
     /*
     the contains method allow to check whether if an item is in the inventory or not
     it uses an enhance for loop to go through all the items in list and return true if the item is found
