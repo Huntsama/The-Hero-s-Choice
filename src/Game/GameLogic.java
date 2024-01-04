@@ -162,9 +162,9 @@ the method is accessed only within this class
 this calls the NpcEncounter method with various instances of the super class Characters.NPC
  */
     private void showNpcEncounter() throws InterruptedException {
-        NpcEncounter(miner);
-        NpcEncounter(kidnapper);
-        NpcEncounter(princess);
+        npcEncounter(miner);
+        npcEncounter(kidnapper);
+        npcEncounter(princess);
     }
 
 
@@ -174,7 +174,7 @@ this calls the NpcEncounter method with various instances of the super class Cha
     @param Characters.NPC : npc
      */
 
-    private void NpcEncounter(NPC npc) throws InterruptedException {
+    private void npcEncounter(NPC npc) throws InterruptedException {
         if (!npc.isEncountered() && npc.getLocation().getX() == player.getLocation().getX()
                 && npc.getLocation().getY() == player.getLocation().getY()) {
             System.out.println("You encounter " + npc.getName());
