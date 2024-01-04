@@ -169,8 +169,8 @@ this calls the NpcEncounter method with various instances of the super class Cha
 
 
     /*
-     the NpcEncounter is the similar to the pickUpItem method.However, this method compares the location of the player
-     to and an Characters.NPC which can either be an Characters.Ally or an Characters.Enemy. If the conditions are met an Characters.NPC shows ups.
+     the npcEncounter is the similar to the pickUpItem method.However, this method compares the location of the player
+     to and  Characters.NPC which can either be an Characters.Ally or an Characters.Enemy. If the conditions are met an Characters.NPC shows ups.
     @param Characters.NPC : npc
      */
 
