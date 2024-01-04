@@ -96,13 +96,11 @@ public class Player {
     /*
     the checkInventory allow the player to display the inventory
      */
-    public void checkInventory() {
+    public void checkInventory(){
         inventory.showInventory();
     }
 
-
-    public boolean hasItem(String itemName) {
+    public boolean hasItem(String itemName){
         return inventory.contains(itemName);
     }
-
 }
