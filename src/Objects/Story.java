@@ -23,7 +23,7 @@ by looping through and displaying the words one after the other with the time sp
     }
 
     public void firstStory() throws InterruptedException{
-        String firstSt ="You are at the entrance of the cave where you followed the screams of the girl. \nYou've gathered all the courage you have to enter and try to save the girl.";
+        String firstSt ="You are at the entrance of the cave where you followed the screams of the girl.\nYou've gathered all the courage you have to enter and try to save the girl.";
         for(int i= 0; i<firstSt.length(); i++){
             System.out.print(firstSt.charAt(i));
             Thread.sleep(15); //reference from: https://www.geeksforgeeks.org/thread-sleep-method-in-java-with-examples/
@@ -33,7 +33,7 @@ by looping through and displaying the words one after the other with the time sp
     }
 
     public void goodEnding() throws InterruptedException {
-        String ending ="You bravely rescued the girl in the cave, who happens to be the lost princess. \nThe kingdom appreciates your heroism, and you become their king, ruling together. Love blossoms, \nand you both live happily ever after.";
+        String ending ="You bravely rescued the girl in the cave, who happens to be the lost princess.\nThe kingdom appreciates your heroism, and you become their king, ruling together. Love blossoms,\nand you both live happily ever after.";
         for(int i= 0; i<ending.length(); i++){
             System.out.print(ending.charAt(i));
             Thread.sleep(15);
