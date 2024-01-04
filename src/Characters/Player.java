@@ -90,7 +90,7 @@ public class Player {
      */
     public void pickUpItem(Item item) {
         inventory.addItem(item);
-        System.out.println(item.getName() + "is added to your inventory list");
+        System.out.println(item.getName() + " is added to your inventory list");
     }
 
     /*
