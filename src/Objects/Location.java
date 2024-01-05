@@ -44,6 +44,7 @@ public class Location {
      * So far as the player position is not greater than 4.
      * A path block message is printed if player wants to still move beyond 4
      */
+
     public void moveNorth() {
         if (y < 4) { // Updated boundary for moving north
             y++;
@@ -91,7 +92,6 @@ public class Location {
      * if the x position is less than 4 increase the x point by 1
      * A path block message is printed if the condition becomes false
      */
-
 
     public void moveEast() {
         if (x < 4) { // Updated boundary for moving east

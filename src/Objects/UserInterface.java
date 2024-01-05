@@ -14,7 +14,7 @@ public class UserInterface {
         System.out.println("\4-------------------------------------------------------------------\4");
         System.out.println("                           THE HERO'S CHOICE                                ");
         System.out.println("\4-------------------------------------------------------------------\4");
-        System.out.println("                  BY: HARUNAH LAMINI &  JAWAD SHAIBASH                ");
+        System.out.println("                  BY: HARUNAH LAMINI &  JAWAD SHAISSAH                ");
         System.out.println("\4-------------------------------------------------------------------\4");
     }
 
