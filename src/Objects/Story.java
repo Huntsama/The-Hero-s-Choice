@@ -20,12 +20,17 @@ this is used to welcome the player and introduce the game and the mission to the
 */
     public void introStory() throws InterruptedException {
 
-        String aboutGame ="Welcome to the Hero's choice game! In this text-based game you are an adventurer travelling around to go back to your village\nthen out of nowhere you heard a woman screaming from a cave, you then decided to rescue the lady by going through the cave\nAfter following them to the cave an adventure ensured,as the player you decides what happens.\nRemember your actions have consequences\nEnter help to display Help commands!\n \nLet the game begin!\n ";
+        String aboutGame ="Welcome to the Hero's choice game! In this text-based game you are an adventurer travelling around to go back to your village\nthen out of nowhere you heard a woman screaming from a cave, you then decided to rescue the lady by going through the cave\nAfter following them to the cave an adventure ensured,as the player you decides what happens.Remember your actions have consequences.";
         for(int i= 0; i<aboutGame.length(); i++){
             System.out.print(aboutGame.charAt(i));
             Thread.sleep(15);
         }
         Thread.sleep(700);
+        System.out.println();
+        System.out.println("\4--------------------------------------\4");
+        System.out.println("Enter help to display Help commands!");
+        System.out.println("\4--------------------------------------\4");
+        System.out.println("Let the game begin!");
         System.out.println();
 
     }

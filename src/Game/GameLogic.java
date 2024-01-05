@@ -107,13 +107,11 @@ public class GameLogic {
 
     }
 
-
     /**
      * The help method display the various commands and how to use them in the game
      * by indicating the keywords to type when playing the game
      */
     private void displayHelp() {
-
         System.out.println("\n\5----------------------------------------------------------------\5");
         System.out.println("\nThe \"help\" command displays a list of available commands that can be used in the game.\n\nHere is a list of commands that you can use:");
         System.out.println("<direction>: Moves the player in the specified direction (north, south, west, east)");
@@ -168,48 +166,67 @@ public class GameLogic {
     }
 
     /**
-     * Shows available items and prompts the player to pick them up
-     * The method is accessed only within this class
-     * this calls the pickUpItem method with the instance of the item such as torch, map and sword
+     * The method shows available items and prompts the player to pick them up
+     * Call the PickUpItem for each predefined item(torch, map, sword) and allow
+     * the player to decide whether to pick up each item individual.
      */
     private void showPickUpItem() {
+        //Call showPickUpItem method for each predefined Item
         pickUpItem(torch);
         pickUpItem(map);
         pickUpItem(sword);
     }
 
 
-    /*
-the method is accessed only within this class
-this calls the NpcEncounter method with various instances of the super class Characters.NPC
- */
+    /**
+     * The method handles the encounter with a non-player character(NPC) at the player's current location
+     * If the NPC has not been encountered and is at the same location as the player,
+     * initiates an encounter with the NPC. The encounter may trigger specific interactions
+     * based on whether the NPC is an enemy or an ally.
+     * @param npc The non-player character (NPC) to encounter.
+     * @throws InterruptedException  If the encounter involves thread interruption.
+     */
+    private void npcEncounter(NPC npc) throws InterruptedException {
+        // Check if the NPC has not been encountered and is at the player's current location
+        if (!npc.isEncountered() && npc.getLocation().getX() == player.getLocation().getX()
+                && npc.getLocation().getY() == player.getLocation().getY()) {
+            // Print the encounter message
+            System.out.println("You encounter " + npc.getName());
+            // Set the NPC as encountered to avoid repeated encounters
+            npc.setEncountered(true);
+            // Check the type of NPC and initiate specific interactions
+            if (npc instanceof Enemy) {
+                // If the NPC is an enemy, trigger enemy-specific encounter
+                ((Enemy) npc).enemyEncounter(player);
+            } else if (npc instanceof Ally) {
+                // If the NPC is an ally, trigger ally-specific encounter
+                ((Ally) npc).allyEncounter(player);
+            }
+
+        }
+    }
+
+
+    /**
+     * The method is used only in the class and initiates NPC encounters for predefined characters.
+     * Calls the npcEncounter method for each NPC, allowing the player to encounter them based on the
+     * location of the player and the NPC.
+     * @throws InterruptedException If any NPC encounter involves thread interruption
+     */
     private void showNpcEncounter() throws InterruptedException {
+        // Call npcEncounter method for each predefined NPC
         npcEncounter(miner);
         npcEncounter(kidnapper);
         npcEncounter(princess);
     }
 
 
-    /*
-     the npcEncounter is the similar to the pickUpItem method.However, this method compares the location of the player
-     to and  Characters.NPC which can either be an Characters.Ally or an Characters.Enemy. If the conditions are met an Characters.NPC shows ups.
-    @param Characters.NPC : npc
-     */
-
-    private void npcEncounter(NPC npc) throws InterruptedException {
-        if (!npc.isEncountered() && npc.getLocation().getX() == player.getLocation().getX()
-                && npc.getLocation().getY() == player.getLocation().getY()) {
-            System.out.println("You encounter " + npc.getName());
-            npc.setEncountered(true);
-            if (npc instanceof Enemy) {
-                ((Enemy) npc).enemyEncounter(player);
-            } else if (npc instanceof Ally) {
-                ((Ally) npc).allyEncounter(player);
-            }
-
+    public void quit() throws InterruptedException {
+        String end = "...";
+        for(int i= 0; i<end.length(); i++){
+            System.out.print(end.charAt(i));
+            Thread.sleep(15);
         }
-    }
-    public void quit(){
         System.out.println("Game Over");
         System.out.println("Thank you for playing ");
         System.exit(1);
