@@ -32,9 +32,9 @@ public class Ally extends NPC {
      */
     public void allyEncounter(Player player) throws InterruptedException {
         if (Objects.equals(getName(), "girl")) {
-            System.out.println("oh my god , I managed to escape. but he wont stop following me , \nplease help me i saw that he dropped his sword back in the north-west of the cave");
+            System.out.println("oh my god , I managed to escape. but he wont stop following me , \nplease help me i saw that he dropped his sword");
         } else {
-            System.out.println("i was mining when I got scared by the screams of a girl getting dragged by a tall and strong guy . \nI threw my torch in the south-east, and I saw him  going north-east. \nBe cautious with the torch, it's quite bright!");
+            System.out.println("i was mining when I got scared by the screams of a girl getting dragged by a tall and strong guy . \nI threw my torch , and I saw him  going north-east. \nBe cautious with the torch, it's quite bright!");
         }
     }
 
