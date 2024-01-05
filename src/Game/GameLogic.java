@@ -1,5 +1,15 @@
+/**
+ * The Gamelogic is the main engine of the game, and it contains most of the logic of the game.
+ * When the game begins it calls the start method from this class it method to start
+ * The displayHelp, pickUpItems,showPickUpItem etc are all called from this class
+ *
+ */
+
+
+//The class is in the Game package
 package Game;
 
+//Importing Game Objects from various packages
 import Characters.Ally;
 import Characters.Enemy;
 import Characters.NPC;
@@ -8,15 +18,12 @@ import Characters.Player;
 import Objects.Story;
 import Objects.UserInterface;
 
+//importing Scanner from the Standard Java Package
 import java.util.Scanner;
-/*
-the game logic class contains most of the logic of the game
-when the game begins it calls the start method from this class
-it method to start, display help, pickupitems,  showPickUpItem etc
- */
+
 public class GameLogic {
 
-    //instance variables
+    //Creating instance variables of the class
     private Player player;
     private Scanner scanner;
     private Item torch, map, sword;
@@ -26,13 +33,13 @@ public class GameLogic {
     private Story story;
     private UserInterface userInterface;
 
-    /*
-    constructor to instantiate the gameLogic
-    some item, Characters.Ally and Characters.Enemy and their location are placed as the game starts
 
+    /**
+     * Constructor to instantiate the class instances
+     * Items, Ally and Enemy and their locations are initialized
      */
     public GameLogic() {
-        this.player = new Player(this);
+        this.player = new Player();
         this.scanner = new Scanner(System.in);
         this.torch = new Item("Torch", 2, 2);
         this.map = new Item("Map", 0, 1);
@@ -43,9 +50,12 @@ public class GameLogic {
         this.story = new Story();
         this.userInterface = new UserInterface();
     }
-    /*
-    the method starts is called in the main to being the game
-    when the game becomes the introStroy and exploreCave() are called.
+
+
+    /**
+     *  The method start is called in the main to begin the game
+     *  When the game began the introStory, firstStory and exploreCave() methods are called.
+     * @throws Exception throw a generic exception of type Exception
      */
 
     public void start() throws Exception {
@@ -55,13 +65,15 @@ public class GameLogic {
         exploreCave();
         System.out.println("Thanks for playing"); //this is printed when you quit the game
         scanner.close();
+
+        throw new Exception("An error occurred when starting the game.");
     }
 
-    /*
-    the exploreCave method allows for the interaction of the player
-    it allows the player to make an input by typing a command
-    Until the player types quite, it will display the various options for the user to chose
-    using the switch case to display various method and decisions
+    /**
+     *  The exploreCave method allows for the interaction of the player.
+     *  It allows the player to make an input by typing a command
+     *  Until the player types quit, the user can type various command to interact with the game
+     * @throws Exception throw a generic exception of type Exception
      */
     private void exploreCave() throws Exception {
 
@@ -92,12 +104,13 @@ public class GameLogic {
                     break;
             }
         }
+
     }
 
 
-    /*
-    the help method display the various commands and how to use them in the game
-    by indicating the keywords to type when playing the game
+    /**
+     * The help method display the various commands and how to use them in the game
+     * by indicating the keywords to type when playing the game
      */
     private void displayHelp() {
 
@@ -105,7 +118,7 @@ public class GameLogic {
         System.out.println("\nThe \"help\" command displays a list of available commands that can be used in the game.\n\nHere is a list of commands that you can use:");
         System.out.println("<direction>: Moves the player in the specified direction (north, south, west, east)");
         System.out.println("\"inventory\"  - Check your inventory");
-        System.out.println("\"use <item>\" - Use an item from your inventory");
+        System.out.println("\"type <item name>\" - Use an item from your inventory");
         System.out.println("\"help\" - Display this help message");
         System.out.println("\"quit\" - Quit the game");
         System.out.println("Objective of the game:");
@@ -113,30 +126,38 @@ public class GameLogic {
     }
 
 
-    /*
-    the pickUpItem is limited to the Game.GameLogic class only and checks a number of conditions to see if the player
-    has encountered an item or not through checking the position of the player and the position of the item the conditions are
-    if the item has not been encountered yet. (!item.isEncountered) and also
-    compares the x and y coordinates of the players location with those of the items location to see if they match
-    if the conditions are met, the code inside the if block is executed and the player takes decision based on it.
-    @param item : item
+    /**
+     *  The pickUpItem method is limited to the GameLogic class only and checks a number of conditions.
+     *  If the item has not been encountered and is at the same location as the player,
+     *  prompts the player to decide whether to pick it up or not.
+     *
+     * @param item The item to be picked up
      */
     private void pickUpItem(Item item) {
+        // Check if the item is not yet encountered and is at the player's current location
         if (!item.isEncountered() && player.getLocation().getX() == item.getLocation().getX()
                 && player.getLocation().getY() == item.getLocation().getY()) {
+            // Prompt the player to pick up the item
             System.out.println("you found a " + item.getName() + ". do you want to pick it up? (type yes to pick it up)");
+
+            // Set up a loop to handle valid responses
             boolean validResponses =false;
             while (!validResponses){
+                // Get the player's response
                 String response = scanner.nextLine().toLowerCase();
+                // Check the response
                 if("yes".equals(response)){
+                    // If the player chooses to pick up the item
                     item.setEncountered(true);
                     player.pickUpItem(item);
                     validResponses = true;
                 } else if ("no".equals(response)) {
+                    // If the player chooses not to pick up the item
                     validResponses = true;
                     System.out.println("You ignored the " + item.getName() + " and did not pick it up");
 
                 }else{
+                    // If the response is invalid, prompt the player again
                     System.out.println("Invalid response. Please type 'yes' or 'no' ");
                 }
 
@@ -146,10 +167,11 @@ public class GameLogic {
         }
     }
 
-/*
-the method is accessed only within this class
-this calls the pickUpItem method with the instance of the item such as torch, map,sword
- */
+    /**
+     * Shows available items and prompts the player to pick them up
+     * The method is accessed only within this class
+     * this calls the pickUpItem method with the instance of the item such as torch, map and sword
+     */
     private void showPickUpItem() {
         pickUpItem(torch);
         pickUpItem(map);

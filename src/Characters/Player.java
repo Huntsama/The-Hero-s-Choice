@@ -24,11 +24,11 @@ public class Player {
 
 
     //passing the Game.GameLogic instance to the Characters.Player constructor
-    public Player(GameLogic gameLogic) {
+    public Player() {
         this.location = new Location(0, 0);
         this.inventory = new Inventory();
         this.story = new Story();
-        this.gameLogic = gameLogic;
+
     }
 
     //returning the location of the player
