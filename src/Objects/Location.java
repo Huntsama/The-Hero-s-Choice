@@ -15,8 +15,8 @@ public class Location {
 
     /**
      * Constructor to instantiate the class instances
-     * @param x point for x
-     * @param y point for y
+     * @param x point for x-coordinate
+     * @param y point for y-coordinate
      */
     public Location(int x, int y) {
         this.x = x;
@@ -25,7 +25,7 @@ public class Location {
 
     /**
      * get the x value when called
-     * @return the point x
+     * @return the  x-coordinate
      */
     public int getX() {
         return x;
@@ -33,7 +33,7 @@ public class Location {
 
     /**
      * get the y value when called
-     * @return the point y
+     * @return the  y-coordinate
      */
     public int getY() {
         return y;
