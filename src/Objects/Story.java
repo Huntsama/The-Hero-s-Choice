@@ -15,9 +15,12 @@ public class Story {
     public Story(){}
 
     /**
-About the game story and introduction of the game method
-this is used to welcome the player and introduce the game and the mission to the player
-*/
+     * About the game story and introduction of the game method
+     * this is used to welcome the player and introduce the game and the mission to the player
+     * The text is displayed character by character with a slight delay to create a typewriter effect.
+     * Introduces a pause after the complete text for better readability.
+     * @throws InterruptedException If thread interruption occurs during text printing
+     */
     public void introStory() throws InterruptedException {
 
         String aboutGame ="Welcome to the Hero's choice game! In this text-based game you are an adventurer travelling around to go back to your village\nthen out of nowhere you heard a woman screaming from a cave, you then decided to rescue the lady by going through the cave\nAfter following them to the cave an adventure ensured,as the player you decides what happens.Remember your actions have consequences.";
@@ -38,7 +41,9 @@ this is used to welcome the player and introduce the game and the mission to the
     /**
      * The first story tells the player the current position and the mission at hand
      *The method is called together with the start method when the game begins
-     * @throws InterruptedException the method may throw an InterruptionException due to the use of Thread.Sleep
+     * The text is displayed character by character with a slight delay to create a typewriter effect.
+     * Introduces a pause after the complete text for better readability.
+     * @throws InterruptedException If thread interruption occurs during text printing
      */
     public void firstStory() throws InterruptedException{
         String firstSt ="You are at the entrance of the cave where you followed the screams of the girl.\nYou've gathered all the courage you have to enter and try to save the girl.";
@@ -52,7 +57,9 @@ this is used to welcome the player and introduce the game and the mission to the
 
     /**
      * The method is called when a player meets the enemy and the player has a sword
-     * @throws InterruptedException the method may throw an InterruptionException due to the use of Thread.Sleep
+     * The text is displayed character by character with a slight delay to create a typewriter effect.
+     * Introduces a pause after the complete text for better readability.
+     * @throws InterruptedException If thread interruption occurs during text printing
      */
     public void goodEnding() throws InterruptedException {
         String ending ="You bravely rescued the girl in the cave, who happens to be the lost princess.\nThe kingdom appreciates your heroism, and you become their king, ruling together. Love blossoms,\nand you both live happily ever after.";
@@ -66,7 +73,9 @@ this is used to welcome the player and introduce the game and the mission to the
 
     /**
      * The method is called when a player meets the enemy without a sword or the player light the torch
-     * @throws InterruptedException the method may throw an InterruptionException due to the use of Thread.Sleep
+     * The text is displayed character by character with a slight delay to create a typewriter effect.
+     * Introduces a pause after the complete text for better readability.
+     * @throws InterruptedException If thread interruption occurs during text printing
      */
 
     public void badEnding() throws InterruptedException {
@@ -85,7 +94,9 @@ this is used to welcome the player and introduce the game and the mission to the
 
     /**
      * The method is called when a player decides to leave the cave without progressing to save the girl
-     * @throws InterruptedException the method may throw an InterruptionException due to the use of Thread.Sleep
+     * The text is displayed character by character with a slight delay to create a typewriter effect.
+     * Introduces a pause after the complete text for better readability.
+     * @throws InterruptedException If thread interruption occurs during text printing
      */
     public void neutralEnding() throws InterruptedException {
         String ending ="You remember you have to care for your mother and can't risk dying. \nSo, you leave the cave, go back home, and focus on your responsibilities. \nLife goes on as usual in the village.";

@@ -66,7 +66,7 @@ public class GameLogic {
         System.out.println("Thanks for playing"); //this is printed when you quit the game
         scanner.close();
 
-        throw new Exception("An error occurred when starting the game.");
+//        throw new Exception("An error occurred when starting the game.");
     }
 
     /**
@@ -87,6 +87,7 @@ public class GameLogic {
             String command = scanner.nextLine().toLowerCase();
             switch (command) {
                 case "quit":
+                    System.exit(1);
                     return;
                 case "help":
                     displayHelp();
@@ -221,21 +222,42 @@ public class GameLogic {
     }
 
 
+    /**
+     * The method initiates the ending process with a countdown and farewell message.
+     * Pausing execution to simulate a countdown, printing dots to the console
+     * Prints "Game Over" and the Thank-you message
+     * @throws InterruptedException If the countdown involves thread interruption.
+     *
+     */
+
     public void quit() throws InterruptedException {
-        String end = "...";
-        for(int i= 0; i<end.length(); i++){
-            System.out.print(end.charAt(i));
-            Thread.sleep(15);
+        //Simulate a countdown with dots
+        for(int i =0; i<3; i++){
+            Thread.sleep(1000);
+            System.out.print(".");
         }
+        //Add a brief pause
+        Thread.sleep(100);
+        System.out.println();
         System.out.println("Game Over");
         System.out.println("Thank you for playing ");
         System.exit(1);
     }
 
+    /**
+     * The method check if the player is at the exit location.
+     * If the player's current location corresponds to the exit coordinates
+     * a message indicating that the player has left the cave and the neutralEnding Story is Triggered
+     * @throws InterruptedException
+     */
     private void leavingCave() throws InterruptedException {
+        // Check if the player is at the exit location
         if (player.getLocation().getX() == 0 && player.getLocation().getY() == -1) {
+            // Print leaving message
             System.out.println("You left the cave");
+            // Call the neutral ending of the story
             story.neutralEnding();
+            // End the game by calling the quit method
             quit();
         }
     }
