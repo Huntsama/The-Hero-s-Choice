@@ -1,7 +1,7 @@
 /**
- * The Gamelogic is the main engine of the game, and it contains most of the logic of the game.
+ * The Game logic is the main engine of the game, and it contains most of the logic of the game.
  * When the game begins it calls the start method from this class it method to start
- * The displayHelp, pickUpItems,showPickUpItem etc are all called from this class
+ * The displayHelp, pickUpItems,showPickUpItem are all called from this class
  *
  */
 
