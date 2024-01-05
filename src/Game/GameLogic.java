@@ -77,8 +77,6 @@ public class GameLogic {
      */
     private void exploreCave() throws Exception {
 
-//      System.out.println("Current location: (" + player.getLocation().getX() + ", " + player.getLocation().getY() + ")");
-
         while (true) {
             showPickUpItem();
             showNpcEncounter();
@@ -138,7 +136,6 @@ public class GameLogic {
                 && player.getLocation().getY() == item.getLocation().getY()) {
             // Prompt the player to pick up the item
             System.out.println("you found a " + item.getName() + ". do you want to pick it up? (type yes to pick it up)");
-
             // Set up a loop to handle valid responses
             boolean validResponses =false;
             while (!validResponses){
@@ -154,7 +151,6 @@ public class GameLogic {
                     // If the player chooses not to pick up the item
                     validResponses = true;
                     System.out.println("You ignored the " + item.getName() + " and did not pick it up");
-
                 }else{
                     // If the response is invalid, prompt the player again
                     System.out.println("Invalid response. Please type 'yes' or 'no' ");
