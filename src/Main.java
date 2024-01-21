@@ -17,5 +17,4 @@ public class Main {
         //Calling the start method in the GameLogic class
         player.start();
     }
-
 }

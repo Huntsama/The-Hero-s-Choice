@@ -39,7 +39,7 @@ public class GameLogic {
      * Items, Ally and Enemy and their locations are initialized
      */
     public GameLogic() {
-        this.player = new Player();
+        this.player = new Player(this);
         this.scanner = new Scanner(System.in);
         this.torch = new Item("Torch", 2, 2);
         this.map = new Item("Map", 0, 1);

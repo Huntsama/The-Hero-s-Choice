@@ -29,12 +29,13 @@ public class Player {
      *Constructor to instantiate the player class with default attributes
      *Initializes the player location starting at (0,0)
      */
-    public Player() {
+    public Player(GameLogic name) {
         this.location = new Location(0, 0);
         //Create an empty inventory for the player
         this.inventory = new Inventory();
         //Initialize the player's story
         this.story = new Story();
+        this.gameLogic = name;
     }
 
     /**
