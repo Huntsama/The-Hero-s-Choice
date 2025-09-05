@@ -12,7 +12,7 @@ public class GameLogic implements Serializable {
 
     //instance variables
     private Player player;
-    private Scanner scanner;
+    private transient Scanner scanner;
     private Item torch, map, sword;
     private Ally miner;
     private Ally princess;
@@ -29,6 +29,19 @@ public class GameLogic implements Serializable {
     public GameLogic(String pName, String pDescription) {
         this.player = new Player(pName,pDescription);
         this.scanner = new Scanner(System.in);
+        this.torch = new Item("Torch", 2, 2);
+        this.map = new Item("Map", 0, 1);
+        this.sword = new Item("Sword", 0, 2);
+        this.miner = new Ally("miner", "you met a miner, he described the area to you and offers support and guidance",1, 1);
+        this.princess = new Ally("princess", "you finally met the princess tired so and thirsty",4, 4);
+        this.kidnapper = new Enemy("kidnapper","The kidnapper" ,3, 3);
+        this.story = new Story();
+
+    }
+
+    public GameLogic(String pName, String pDescription, Scanner scanner) {
+        this.player = new Player(pName,pDescription);
+        this.scanner = scanner;
         this.torch = new Item("Torch", 2, 2);
         this.map = new Item("Map", 0, 1);
         this.sword = new Item("Sword", 0, 2);
@@ -178,44 +191,29 @@ this calls the NpcEncounter method with various instances of the super class NPC
     }
 
     public void  loadPreviousGame() throws NullPointerException  {
-        GameLogic gameLogic = new GameLogic();
     try {
-        gameLogic = new LoadGame().loadGame();
-        gameLogic.player.getName();
-        //Welcome back message
-        System.out.println("\n\4--------------------------------\4");
-        System.out.println("WELCOME BACK, " +   gameLogic.player.getName());
-        System.out.println("\4--------------------------------\4");
+        GameLogic gameLogic = new LoadGame().loadGame();
+        if(gameLogic != null) {
+            gameLogic.scanner = new Scanner(System.in); // Reinitialize scanner after deserialization
+            //Welcome back message
+            System.out.println("\n\4--------------------------------\4");
+            System.out.println("WELCOME BACK, " +   gameLogic.player.getName());
+            System.out.println("\4--------------------------------\4");
 
-        //users last location
-        System.out.println("\n| You were at, " + player.getLocation());
-        System.out.println("\4-------------------------\4");
-        System.out.println(gameLogic.loadGame().loadGame()+"\n");
+            //users last location  
+            System.out.println("\n| You were at, " + gameLogic.player.getLocation());
+            System.out.println("\4-------------------------\4");
+            gameLogic.start();
+        } else {
+            System.out.println("You do not have saved game");
+        }
     }catch (Exception e){
         System.out.println("You do not have saved game ");
     }
 
-
     }
 
 
-        public GameLogic loadGame(){
-            File f = new File("src\\save.txt");
-            if(f.exists()){
-                try{
-                    FileInputStream file = new FileInputStream(f);
-                    ObjectInputStream objectFile = new ObjectInputStream(file);
-                    GameLogic gameLogic = (GameLogic) objectFile.readObject();
-                    file.close();
-                    objectFile.close();
-                    return gameLogic;
-                }catch (Exception e){
-                    System.out.println("Something went wrong");
-
-                }
-            }
-            return null;
-        }
 
 
     public  void   newGame(){
@@ -234,14 +232,27 @@ this calls the NpcEncounter method with various instances of the super class NPC
         }
     }
 
+    public  void   newGame(Scanner input){
+        //Taking players name
+        System.out.println("Enter your name: ");
+        String pName = input.nextLine();
+
+        GameLogic gameLogic = new GameLogic(pName,"Main Player", input);
+        System.out.println("You are in " + gameLogic.player.getLocation());
+        System.out.println("\4-------------------------\4");
+        try {
+            gameLogic.start();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public void quiteAndSave() throws Exception {
-        GameLogic gameLogic = new GameLogic();
-        new SaveGame().saveGame(gameLogic);
         System.out.println("Do you want to save the progress? (y/n) ");
         String command = scanner.nextLine().toLowerCase().strip();
         try {
             if(command.equals("y")){
-                new SaveGame().saveGame(gameLogic);
+                new SaveGame().saveGame(this);
                 System.out.println("Game saved");
                 for(int i=0; i<3; i++){
                     Thread.sleep(1000);
@@ -251,7 +262,7 @@ this calls the NpcEncounter method with various instances of the super class NPC
                 System.out.println("Quitting the Game");
             }
         } catch (Exception e) {
-            System.out.println("Error occurred while saving the game" + e.getMessage());;
+            System.out.println("Error occurred while saving the game: " + e.getMessage());
         }
     }
 

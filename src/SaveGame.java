@@ -1,12 +1,11 @@
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class SaveGame {
     public void saveGame(GameLogic game) throws Exception{
         try{
-            File f = new File("src\\save.txt");
+            File f = new File("src/save.txt");
             f.createNewFile();
 
             FileOutputStream file = new FileOutputStream(f);

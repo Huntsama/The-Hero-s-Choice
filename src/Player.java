@@ -7,7 +7,9 @@ the player can as well use the use the item in the inventory
  */
 
 
-public class Player {
+import java.io.Serializable;
+
+public class Player implements Serializable {
     private Location location; //instance variable to check location
     private Inventory inventory; //instance variable to keep items
     private String name;
@@ -27,7 +29,7 @@ public class Player {
     }
 
     public String getName(){
-        return getName();
+        return name;
     }
 
     public void setName(String name){

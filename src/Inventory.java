@@ -6,7 +6,9 @@ the inventory class stores various items that the player has collected
 the class contains methods to add items, check items in the inventory and
 show items in the inventory
  */
-public class Inventory {
+import java.io.Serializable;
+
+public class Inventory implements Serializable {
     //instance variables
     private List<Item> items;
 

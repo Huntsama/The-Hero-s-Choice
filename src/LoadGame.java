@@ -4,7 +4,7 @@ import java.io.ObjectInputStream;
 
 public class LoadGame {
     public GameLogic loadGame(){
-       File f = new File("src\\save.txt");
+       File f = new File("src/save.txt");
        if(f.exists()){
            try{
                FileInputStream file = new FileInputStream(f);
@@ -16,7 +16,7 @@ public class LoadGame {
                objectFile.close();
                return gameLogic;
            }catch (Exception e){
-
+               System.out.println("Error loading game: " + e.getMessage());
            }
        }
        return null;

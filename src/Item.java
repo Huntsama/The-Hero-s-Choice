@@ -3,7 +3,9 @@ the item class allows for items to be used in the game
 various items can be created from the item class
 items can also be placed in various locations
  */
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable {
 
     //instance variables
     private String name;

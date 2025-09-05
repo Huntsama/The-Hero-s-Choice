@@ -1,4 +1,6 @@
-public class Story {
+import java.io.Serializable;
+
+public class Story implements Serializable {
 
     public Story(){}
 
