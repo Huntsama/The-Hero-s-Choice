@@ -1,6 +1,9 @@
+package utils;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
+import game.*;
 
 public class LoadGame {
     public GameLogic loadGame(){

@@ -4,7 +4,10 @@ the NPC class is a generally class for the Ally and the Enemy
 
  */
 
+package entities;
+
 import java.io.Serializable;
+import utils.*;
 
 public class NPC implements Serializable {
     //instance variables

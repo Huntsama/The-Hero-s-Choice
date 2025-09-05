@@ -1,6 +1,9 @@
+package utils;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
+import game.*;
 
 public class SaveGame {
     public void saveGame(GameLogic game) throws Exception{

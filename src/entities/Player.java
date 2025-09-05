@@ -7,7 +7,11 @@ the player can as well use the use the item in the inventory
  */
 
 
+package entities;
+
 import java.io.Serializable;
+import items.*;
+import utils.*;
 
 public class Player implements Serializable {
     private Location location; //instance variable to check location

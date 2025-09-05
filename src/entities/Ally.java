@@ -1,3 +1,4 @@
+package entities;
 
 /*
 the Ally class inherit from the NPC class

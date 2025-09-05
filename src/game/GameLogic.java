@@ -1,8 +1,13 @@
+package game;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.Scanner;
+import entities.*;
+import items.*;
+import utils.*;
 /*
 the game logic class contains most of the logic of the game
 when the game begins it calls the start method from this class

@@ -1,6 +1,7 @@
-import java.util.Arrays;
-import java.util.List;
+package game;
+
 import java.util.Scanner;
+import utils.*;
 
 public class HeroesChoiceMain {
 

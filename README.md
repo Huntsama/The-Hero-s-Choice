@@ -37,6 +37,7 @@ Navigate through the cave system, collect useful items, interact with NPCs, and 
 ### Prerequisites
 - Java Development Kit (JDK) 8 or higher
 - Command line or terminal access
+- Make (optional, for using Makefile commands)
 
 ### Installation & Running
 
@@ -47,15 +48,27 @@ Navigate through the cave system, collect useful items, interact with NPCs, and 
    cd The-Hero-s-Choice
    ```
 
-3. **Compile** the Java files:
+3. **Quick Start (using Makefile)**:
    ```bash
-   javac -d . src/*.java
+   make run
+   ```
+   
+   **Or compile and run manually**:
+   ```bash
+   # Compile
+   make compile
+   # OR manually: javac -d build src/*.java
+   
+   # Run
+   java -cp build HeroesChoiceMain
    ```
 
-4. **Run** the game:
-   ```bash
-   java HeroesChoiceMain
-   ```
+### Available Make Commands
+- `make run` - Compile and run the game
+- `make compile` - Compile all Java files  
+- `make clean` - Remove compiled class files
+- `make clean-all` - Remove entire build directory
+- `make help` - Show available commands
 
 ## 🎮 How to Play
 
@@ -95,25 +108,40 @@ Once in the game, you can use the following commands:
 ### Saving Your Game
 - When you type `quit`, you'll be prompted to save your progress
 - Type `y` to save or `n` to quit without saving
-- Saved games are stored in `src/save.txt`
+- Saved games are stored in `src/data/save.txt`
 
 ## 🏗️ Project Structure
 
 ```
 The-Hero-s-Choice/
-├── src/
-│   ├── HeroesChoiceMain.java    # Main entry point
-│   ├── GameLogic.java           # Core game logic and mechanics
-│   ├── Player.java              # Player class with movement and actions
-│   ├── Story.java               # Story and narrative content
-│   ├── Location.java            # Grid coordinate system
-│   ├── Item.java                # Item system
-│   ├── Inventory.java           # Inventory management
-│   ├── NPC.java                 # Base NPC class
-│   ├── Ally.java                # Friendly NPC subclass
-│   ├── Enemy.java               # Hostile NPC subclass
-│   ├── SaveGame.java            # Game saving functionality
-│   └── LoadGame.java            # Game loading functionality
+├── src/                         # Source code directory
+│   ├── game/                    # Main game logic package
+│   │   ├── HeroesChoiceMain.java    # Main entry point
+│   │   ├── GameLogic.java           # Core game logic and mechanics
+│   │   └── Story.java               # Story and narrative content
+│   ├── entities/                # Game entities package  
+│   │   ├── Player.java              # Player class with movement and actions
+│   │   ├── NPC.java                 # Base NPC class
+│   │   ├── Ally.java                # Friendly NPC subclass
+│   │   └── Enemy.java               # Hostile NPC subclass
+│   ├── items/                   # Items and inventory package
+│   │   ├── Item.java                # Item system
+│   │   └── Inventory.java           # Inventory management
+│   ├── utils/                   # Utility classes package
+│   │   ├── Location.java            # Grid coordinate system
+│   │   ├── SaveGame.java            # Game saving functionality
+│   │   └── LoadGame.java            # Game loading functionality
+│   └── data/                    # Game data
+│       └── save.txt                 # Game save file (generated)
+├── build/                       # Compiled class files (.class)
+│   ├── game/                    # Compiled game classes
+│   ├── entities/                # Compiled entity classes
+│   ├── items/                   # Compiled item classes
+│   └── utils/                   # Compiled utility classes
+├── docs/                        # Documentation (future expansion)
+├── assets/                      # Game assets (future expansion)
+├── .gitignore                   # Git ignore file
+├── Makefile                     # Build automation
 └── README.md                    # This file
 ```
 
@@ -192,6 +220,35 @@ This game emphasizes:
 - **Exploration**: Discover items and NPCs through systematic exploration
 - **Resource management**: Collect and use items strategically
 - **Narrative immersion**: Simple story text with timed displays for dramatic effect
+
+## 🔧 Development
+
+### Building the Project
+```bash
+# Clean previous builds
+make clean-all
+
+# Compile the project
+make compile
+
+# Run the game
+make run
+```
+
+### Code Structure
+The project follows object-oriented design principles:
+- **Inheritance**: NPC → Ally/Enemy classes
+- **Encapsulation**: Private fields with public getters/setters
+- **Polymorphism**: Different NPC behaviors through method overriding
+- **File I/O**: Save/load game functionality using Java serialization
+
+### Future Enhancements
+- [ ] Combat system with health points
+- [ ] More complex inventory interactions
+- [ ] Multiple endings based on choices
+- [ ] Sound effects (stored in `assets/` directory)
+- [ ] Expanded cave system with more levels
+- [ ] Achievement system
 
 ## 👤 About
 

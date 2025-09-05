@@ -1,3 +1,5 @@
+package entities;
+
 /*
 the Enemy is an NPC and therefore inherit the characteristics of the NPC class
 the enemy is a dangerous NPC that will attempt to not allow the player to accomplished

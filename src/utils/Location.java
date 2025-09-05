@@ -6,6 +6,8 @@ the idea of 4 X 4 matrix was employed to define the locations and the game map.
 the x and y shows the coordinates in horizontal and vertical directions
  */
 
+package utils;
+
 import java.io.Serializable;
 
 public class Location implements Serializable {
